@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Catálogo de Productos</title>
+</head>
+<body>
+  <h1>Catálogo</h1>
+  <ul id="lista"></ul>
+
+  <script>
+    fetch('http://localhost:3000/productos')
+      .then(res => res.json())
+      .then(data => {
+        const lista = document.getElementById('lista');
+        data.forEach(p => {
+          const li = document.createElement('li');
+          li.textContent = p.nombre + " - Stock: " + p.stock;
+          lista.appendChild(li);
+        });
+      })
+      .catch(err => {
+        console.error("Error al obtener productos:", err);
+      });
+  </script>
+</body>
+</html>
